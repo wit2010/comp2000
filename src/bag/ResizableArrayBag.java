@@ -2,7 +2,7 @@ package bag;
 
 import java.util.Arrays;
 
-public class ResizableArrayBag<T> implements BagInterface<T> {
+public class ResizableArrayBag<T> implements IBag<T> {
 	private static final int DEFAULT_CAPACITY = 10;
 	private T[] bagArray;
 	private int numberOfEntries = 0;
