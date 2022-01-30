@@ -2,7 +2,7 @@ package bag;
 
 import java.util.Arrays;
 
-public class ResizableArrayBag<T> implements IBag<T> {
+public class ArrayBag<T> implements IBag<T> {
 	private static final int DEFAULT_CAPACITY = 10;
 	private T[] bagArray;
 	private int numberOfEntries = 0;
@@ -15,7 +15,7 @@ public class ResizableArrayBag<T> implements IBag<T> {
 	 */
 
 	@SuppressWarnings("unchecked")
-	public ResizableArrayBag(int capacity) {
+	public ArrayBag(int capacity) {
 		bagArray = (T[]) new Object[capacity];
 		this.capacity = capacity;
 	}
@@ -23,7 +23,7 @@ public class ResizableArrayBag<T> implements IBag<T> {
 	/**
 	 * Creates an empty bag having the default initial capacity
 	 */
-	public ResizableArrayBag() {
+	public ArrayBag() {
 		this(DEFAULT_CAPACITY);
 	}
 
@@ -101,22 +101,22 @@ public class ResizableArrayBag<T> implements IBag<T> {
 	}
 
 	@Override
-
 	public T[] toArray() {
 		T[] result = Arrays.copyOf(bagArray, numberOfEntries);
 		return result;
 	}
 
-	public ResizableArrayBag<T> copy() {
-		ResizableArrayBag<T> result = new ResizableArrayBag<>();
+	public ArrayBag<T> copy() {
+		ArrayBag<T> result = new ArrayBag<>();
 		for (int idx = 0; idx < numberOfEntries; idx++)
 			result.add(bagArray[idx]);
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public boolean equals(Object o) {
-		ResizableArrayBag<T> otherBag = (ResizableArrayBag<T>) o;
+		ArrayBag<T> otherBag = (ArrayBag<T>) o;
 		if (otherBag.getCurrentSize() != numberOfEntries)
 			return false;
 		otherBag = otherBag.copy();
@@ -127,20 +127,19 @@ public class ResizableArrayBag<T> implements IBag<T> {
 		return true;
 	}
 
-	public ResizableArrayBag<T> union(ResizableArrayBag<T> otherBag) {
-		ResizableArrayBag<T> result = otherBag.copy();
+	public ArrayBag<T> union(ArrayBag<T> otherBag) {
+		ArrayBag<T> result = otherBag.copy();
 		for (int idx = 0; idx < numberOfEntries; idx++)
 			result.add(bagArray[idx]);
 		return result;
 	}
 
-	public ResizableArrayBag<T> intersection(ResizableArrayBag<T> other) {
-		ResizableArrayBag<T> result = new ResizableArrayBag<>();
-		ResizableArrayBag<T> otherCopy = other.copy();
+	public ArrayBag<T> intersection(ArrayBag<T> other) {
+		ArrayBag<T> result = new ArrayBag<>();
+		ArrayBag<T> otherCopy = other.copy();
 		for (int idx = 0; idx < numberOfEntries; idx++) {
 			if (otherCopy.remove(bagArray[idx]))
 				result.add(bagArray[idx]);
-
 		}
 		return result;
 	}
