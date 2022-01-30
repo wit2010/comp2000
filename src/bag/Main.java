@@ -1,6 +1,6 @@
 package bag;
 
-public class BagDriver {
+public class Main {
 
 	public static void main(String[] args) {
 		ArrayBag<String> words = new ArrayBag<>();
@@ -33,24 +33,24 @@ public class BagDriver {
 		System.out.println(names.getFrequencyOf("sea"));
 
 		ArrayBag<String> unionbag = words.union(names);
-		Object[] content = unionbag.toArray();
-
 		int len = unionbag.getCurrentSize();
 
-		for (int idx = 0; idx < len; idx++)
-			System.out.println(content[idx]);
+		Object[] content = unionbag.toArray();
+		for (int i = 0; i < len; i++)
+			System.out.println(content[i]);
 
 		System.out.print("How many times \"sea\" appears in unionbag? ");
 		System.out.println(unionbag.getFrequencyOf("sea"));
 
 		System.out.print("How many times \"sea\" appears in names? ");
 		System.out.println(names.getFrequencyOf("sea"));
+
 		ArrayBag<String> intersect = names.intersection(words);
 		content = intersect.toArray();
 		len = intersect.getCurrentSize();
 		System.out.println("=======Intersection========");
 		for (int idx = 0; idx < len; idx++)
 			System.out.println(content[idx]);
-
 	}
+
 }
