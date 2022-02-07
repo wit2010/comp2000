@@ -3,7 +3,7 @@ package bag;
 public class Main {
 
 	public static void main(String[] args) {
-		ArrayBag<String> words = new ArrayBag<>();
+		ArrayBag<String> words = new ArrayBag<String>();
 
 		words.add("home");
 		words.add("sea");

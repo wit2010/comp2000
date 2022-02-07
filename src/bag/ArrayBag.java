@@ -2,7 +2,7 @@ package bag;
 
 import java.util.Arrays;
 
-public class ArrayBag<T> implements IBag<T> {
+public class ArrayBag<T> implements Bag<T> {
 	private static final int DEFAULT_CAPACITY = 10;
 	private T[] bagArray;
 	private int numberOfEntries = 0;

@@ -1,6 +1,6 @@
 package bag;
 
-public interface IBag <T> {
+public interface Bag <T> {
     /**
      Gets the current number of objects in the bag
      @return the integer number of objects in the bag

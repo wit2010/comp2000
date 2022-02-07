@@ -2,7 +2,7 @@ package bag;
 
 import utils.Node;
 
-public class LinkedBag<T> implements IBag<T> {
+public class LinkedBag<T> implements Bag<T> {
 	private Node<T> head;
 	private int numberOfEntries = 0;
 
