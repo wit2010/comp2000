@@ -24,7 +24,7 @@ public class ArrayStack<T> implements Stack<T> {
 	@Override
 	public void push(T entry) {
 		if (isFull())
-			ensureCapacity();
+			grow();
 		array[size++] = entry;
 	}
 
@@ -56,8 +56,8 @@ public class ArrayStack<T> implements Stack<T> {
 		return size == capacity;
 	}
 
-	private void ensureCapacity() {
-		capacity *= 2;
+	private void grow() {
+		capacity = (int) (1.6f * capacity);
 		array = Arrays.copyOf(array, capacity);
 	}
 
