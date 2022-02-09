@@ -2,7 +2,7 @@ package stack;
 
 import java.util.Scanner;
 
-public class Foo {
+public class Example2 {
 	
 	public static boolean isBalanced(String expression) {
 		ArrayStack<Character> stack = new ArrayStack<>();

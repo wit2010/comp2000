@@ -2,7 +2,7 @@ package stack;
 
 import java.util.Scanner;
 
-public class Boo {
+public class Example4 {
 	
 	public static String infixToPostfix(String expression) {
 		ArrayStack<Character> stack = new ArrayStack<>();
@@ -25,7 +25,7 @@ public class Boo {
 					result.append(stack.pop());
 				stack.pop();
 
-			} else {
+			} else if (Character.isDigit(c)){
 				result.append(c);
 			}
 		}
@@ -54,13 +54,45 @@ public class Boo {
 		return 0;
 	}
 
+	private static int calc(String expression) {
+		ArrayStack<Character> stack = new ArrayStack<>();
+		for (int i = 0; i < expression.length(); i++)
+			stack.push(expression.charAt(i));
+		return calc(stack);
+	}
+
+	private static int calc(ArrayStack<Character> stack) {
+		Character c = stack.pop();
+		
+		if (isOperator(c)) {
+			int operand2 = calc(stack);
+			int operand1 = calc(stack);
+			switch (c) {
+			case '+':
+				return operand1 + operand2;
+			case '-':
+				return operand1 - operand2;
+			case '*':
+				return operand1 * operand2;
+			case '/':
+				return operand1 / operand2;
+			case '^':
+				return operand1 ^ operand2;
+			default:
+				return 0;
+			}
+		} else {
+			return c - '0';
+		}
+	}
+
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Enter an algebraic infix expression");
 		String expression = scanner.nextLine();
 
-		System.out.println("Postfix form: " + infixToPostfix(expression));
+		System.out.println("Result = " + calc(infixToPostfix(expression)));
 
 		scanner.close();
 	}

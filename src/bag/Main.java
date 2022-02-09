@@ -49,8 +49,8 @@ public class Main {
 		content = intersect.toArray();
 		len = intersect.getCurrentSize();
 		System.out.println("=======Intersection========");
-		for (int idx = 0; idx < len; idx++)
-			System.out.println(content[idx]);
+		for (int i = 0; i < len; i++)
+			System.out.println(content[i]);
 	}
 
 }
