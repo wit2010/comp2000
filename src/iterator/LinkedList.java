@@ -1,8 +1,13 @@
-package list;
+package iterator;
 
 import utils.Node;
 
-public class LinkedList<T> implements List<T> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import list.List;
+
+public class LinkedList<T> implements List<T>, Iterable<T> {
 
 	private Node<T> firstNode;
 	private int numberOfEntries;
@@ -163,6 +168,37 @@ public class LinkedList<T> implements List<T> {
 			result[i++] = currNode.getData();
 		}
 		return result;
+	}
+
+	public Iterator<T> iterator() {
+		return new LinkedListIterator();
+	}
+
+	private class LinkedListIterator implements Iterator<T> {
+
+		private Node<T> nextNode;
+
+		public LinkedListIterator() {
+			if (isEmpty())
+				throw new IllegalStateException("Cannot iterate on empty list");
+			nextNode = firstNode;
+		}
+
+		public boolean hasNext() {
+			return nextNode != null;
+		}
+
+		public T next() {
+			if (!hasNext())
+				throw new NoSuchElementException("Illegal call: iterator after the end of the list");
+			T result = nextNode.getData();
+			nextNode = nextNode.getNext();
+			return result;
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 }

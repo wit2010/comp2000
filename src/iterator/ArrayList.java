@@ -1,8 +1,10 @@
-package list;
+package iterator;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class ArrayList<T> implements List<T> {
+public class ArrayList<T> implements List<T>, Iterable<T> {
 
 	private T[] array;
 	private int numberOfEntries;
@@ -123,6 +125,40 @@ public class ArrayList<T> implements List<T> {
 	public Object[] toArray() {
 		Object[] result = Arrays.copyOf(array, numberOfEntries);
 		return result;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new ArrayListIterator();
+	}
+
+	private class ArrayListIterator implements Iterator<T> {
+
+		private int cursor;
+ 
+		private boolean canRemove;
+
+		public ArrayListIterator() {
+			cursor = 0;
+		}
+
+		public boolean hasNext() {
+			return cursor < numberOfEntries;
+		}
+
+		public T next() {
+			if (!hasNext())
+				throw new NoSuchElementException("Illegal call: iterator after the end of the list");
+			canRemove = true;
+			return array[cursor++];
+		}
+
+		public void remove() {
+			if (!canRemove)
+				throw new IllegalStateException("remove was called without call to next");
+			ArrayList.this.remove(--cursor);
+			canRemove = false;
+		}
 	}
 
 }
