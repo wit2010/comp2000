@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayList<T> implements List<T>, Iterable<T> {
+public class ArrayList<T> implements List<T> {
 
 	private T[] array;
 	private int numberOfEntries;
@@ -142,10 +142,12 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
 			cursor = 0;
 		}
 
+		@Override
 		public boolean hasNext() {
 			return cursor < numberOfEntries;
 		}
 
+		@Override
 		public T next() {
 			if (!hasNext())
 				throw new NoSuchElementException("Illegal call: iterator after the end of the list");
@@ -153,6 +155,7 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
 			return array[cursor++];
 		}
 
+		@Override
 		public void remove() {
 			if (!canRemove)
 				throw new IllegalStateException("remove was called without call to next");

@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 import list.List;
 
-public class LinkedList<T> implements List<T>, Iterable<T> {
+public class LinkedList<T> implements List<T> {
 
 	private Node<T> firstNode;
 	private int numberOfEntries;

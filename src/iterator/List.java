@@ -1,6 +1,6 @@
 package iterator;
 
-public interface List<T> {
+public interface List<T> extends Iterable<T> {
 	/**
 	 * Add new entry at the end of the list
 	 * 
