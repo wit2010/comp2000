@@ -1,4 +1,4 @@
-package sorted;
+package sortedlist;
 
 class Name implements Comparable<Name> {
 	private String firstName;

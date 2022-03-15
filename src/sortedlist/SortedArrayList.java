@@ -1,4 +1,4 @@
-package sorted;
+package sortedlist;
 
 import list.ArrayList;
 

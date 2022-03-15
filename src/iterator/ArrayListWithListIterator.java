@@ -3,7 +3,6 @@ package iterator;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.ListIterator;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayListWithListIterator<T> implements List<T> {
@@ -307,12 +306,6 @@ public class ArrayListWithListIterator<T> implements List<T> {
 		}
 	}
 
-	public static <T> void displayList(List<T> list) {
-		for (T object : list)
-			System.out.print(object + " ");
-		System.out.println();
-	}
-
 	public static void main(String[] args) {
 		ArrayListWithListIterator<String> list = new ArrayListWithListIterator<>();
 
@@ -323,91 +316,38 @@ public class ArrayListWithListIterator<T> implements List<T> {
 		list.add("Ethan");
 		list.add("Faina");
 
-		Iterator<String> iterator = list.iterator();
-
+		ListIterator<String> iterator = list.iterator();
+		
 		String current = iterator.next();
-		// current = nameIterator.previous();
-
-		ListIterator<String> nameListIterator = list.iterator();
-		current = nameListIterator.next();
-		System.out.println(current);
-		current = nameListIterator.previous();
 		System.out.println(current);
 
-		while (nameListIterator.hasNext())
-			current = nameListIterator.next();
-		nameListIterator.remove();
-		while (nameListIterator.hasPrevious())
-			current = nameListIterator.previous();
-		nameListIterator.remove();
+		current = iterator.previous();
+		System.out.println(current);
 
-		for (String s : list)
-			System.out.print(s + " ");
+		while (iterator.hasNext())
+			current = iterator.next();
+		iterator.remove();
+
+		while (iterator.hasPrevious())
+			current = iterator.previous();
+		iterator.remove();
+
+		for (String name : list)
+			System.out.print(name + " ");
 		System.out.println();
 
-		nameListIterator.add("Jill");
+		iterator.add("Jill");
 
-		nameListIterator.previous();
+		iterator.previous();
 
-		while (nameListIterator.hasNext()) {
-			String old = nameListIterator.next();
-			nameListIterator.set(old + ",junior");
+		while (iterator.hasNext()) {
+			String old = iterator.next();
+			iterator.set(old + ",junior");
 		}
 
-		for (String s : list)
-			System.out.print(s + " ");
+		for (String name : list)
+			System.out.print(name + " ");
 		System.out.println();
-
-		ArrayListWithListIterator<String> slist = new ArrayListWithListIterator<>();
-		String[] otherStates = { "NJ", "DE", "PA", "MD", "NC" };
-
-		slist.add("MA");
-		slist.add("RI");
-		slist.add("CT");
-		slist.add("NH");
-		slist.add("VT");
-		slist.add("ME");
-
-		slist.addAll(otherStates);
-
-		ListIterator<String> statesIterator = slist.iterator();
-
-		while (statesIterator.hasNext())
-			System.out.print(statesIterator.nextIndex() + ":" + statesIterator.next() + " ");
-		System.out.println();
-		while (statesIterator.hasPrevious())
-			System.out.print(statesIterator.previousIndex() + ":" + statesIterator.previous() + " ");
-
-		ArrayListWithListIterator<String> nameList = new ArrayListWithListIterator<>();
-		String[] names = { "Kyle", "Cathy", "Sam", "Austin", "Sara", "David" };
-		nameList.addAll(names);
-
-		ListIterator<String> namesIterator = nameList.iterator();
-		System.out.println(namesIterator.next());
-		namesIterator.remove();
-		namesIterator.next();
-		namesIterator.next();
-		namesIterator.add("Bobby");
-		namesIterator.previous();
-		namesIterator.remove();
-		System.out.println(namesIterator.next());
-		namesIterator.next();
-		namesIterator.set("Brittany");
-		System.out.println("Revised list:");
-		displayList(nameList);
-		System.out.println(namesIterator.previous());
-		System.out.println(namesIterator.next());
-		while (namesIterator.hasPrevious())
-			namesIterator.previous();
-		while (!namesIterator.next().equals("Sam")) {
-			;
-		}
-		namesIterator.previous();
-		namesIterator.add("Bobby");
-		namesIterator.next();
-		namesIterator.add("Bobby");
-		System.out.println();
-		displayList(nameList);
 	}
 
 }

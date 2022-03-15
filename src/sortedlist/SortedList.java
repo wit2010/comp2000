@@ -1,4 +1,4 @@
-package sorted;
+package sortedlist;
 
 public interface SortedList<T extends Comparable<? super T>> {
 	/**
