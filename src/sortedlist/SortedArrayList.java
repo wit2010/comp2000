@@ -4,6 +4,14 @@ import list.ArrayList;
 
 public class SortedArrayList<T extends Comparable<? super T>> extends ArrayList<T> implements SortedList<T> {
 
+	public SortedArrayList(int capacity) {
+		super(capacity);
+	}
+	
+	public SortedArrayList() {
+		super();
+	}
+
 	@Override
 	public void addEntry(T newEntry) {
 		int position = getPosition(newEntry);
