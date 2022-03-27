@@ -14,7 +14,13 @@ public class SortedLinkedDictionary<K extends Comparable<? super K>, V> implemen
 	}
 
 	public V getValue(K key) {
-		// to implement
+		for (Node currNode = head; currNode != null; currNode = currNode.getNext()) {
+			int result = key.compareTo(currNode.getKey());
+			if (result == 0)
+				return currNode.getValue();
+			if (result < 0)
+				break;
+		}
 		return null;
 	}
 
@@ -31,8 +37,14 @@ public class SortedLinkedDictionary<K extends Comparable<? super K>, V> implemen
 		return false;
 	}
 
-	public boolean contains(K aKey) {
-		// to implement
+	public boolean contains(K key) {
+		for (Node currNode = head; currNode != null; currNode = currNode.getNext()) {
+			int result = key.compareTo(currNode.getKey());
+			if (result == 0)
+				return true;
+			if (result < 0)
+				break;
+		}
 		return false;
 	}
 
@@ -98,17 +110,17 @@ public class SortedLinkedDictionary<K extends Comparable<? super K>, V> implemen
 	}
 
 	public Iterator<K> getKeyIterator() {
-		return new KeyIteratorForLinkedDictionary();
+		return new KeyIterator();
 	}
 
 	public Iterator<V> getValueIterator() {
-		return new ValueIteratorForLinkedDictionary();
+		return new ValueIterator();
 	}
 
-	private class KeyIteratorForLinkedDictionary implements Iterator<K> {
+	private class KeyIterator implements Iterator<K> {
 		private Node nextNode;
 
-		public KeyIteratorForLinkedDictionary() {
+		public KeyIterator() {
 			nextNode = head;
 		}
 
@@ -129,7 +141,7 @@ public class SortedLinkedDictionary<K extends Comparable<? super K>, V> implemen
 		}
 	}
 
-	private class ValueIteratorForLinkedDictionary implements Iterator<V> {
+	private class ValueIterator implements Iterator<V> {
 
 		@Override
 		public boolean hasNext() {

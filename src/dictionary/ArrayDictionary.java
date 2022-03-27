@@ -9,9 +9,13 @@ public class ArrayDictionary<K, V> implements Dictionary<K, V> {
 	private int numberOfEntries;
 	private static final int DEFAULT_CAPACITY = 10;
 
-	@SuppressWarnings("unchecked")
 	public ArrayDictionary() {
-		entries = (Entry<K, V>[]) new Entry[DEFAULT_CAPACITY];
+		this(DEFAULT_CAPACITY);
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayDictionary(int capacity) {
+		entries = (Entry<K, V>[]) new Entry[capacity];
 		numberOfEntries = 0;
 	}
 
@@ -59,13 +63,14 @@ public class ArrayDictionary<K, V> implements Dictionary<K, V> {
 	}
 
 	public V getValue(K key) {
-		// to implement
+		int keyIndex = locateIndex(key);
+		if (keyIndex < numberOfEntries)
+			return entries[keyIndex].getValue();
 		return null;
 	}
 
 	public boolean contains(K key) {
-		// to implement
-		return false;
+		return locateIndex(key) < numberOfEntries;
 	}
 
 	public int getSize() {
