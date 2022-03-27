@@ -10,12 +10,15 @@ import dictionary.SortedLinkedDictionary;
 
 public class Example5 {
 
-	public static void test_1(int size) {
+	private final static int size = 100000;
+	
+	public static void test_1() {
 		Random rand = new Random();
+
+		Dictionary<Integer, Object> dictionary = new ArrayDictionary<>(size);
 
 		long t1 = System.currentTimeMillis();
 		
-		Dictionary<Integer,Object> dictionary = new ArrayDictionary<>(size);
 		for (int i = 0; i < size; i++)
 			dictionary.add(rand.nextInt(size), new Object());
 
@@ -29,12 +32,13 @@ public class Example5 {
 		System.out.println("ArrayDictionary: " + (t2 - t1) + ", " + (t3 - t2) + " msec");
 	}
 	
-	public static void test_2(int size) {
+	public static void test_2() {
 		Random rand = new Random();
+
+		Dictionary<Integer, Object> dictionary = new SortedLinkedDictionary<>();
 
 		long t1 = System.currentTimeMillis();
 
-		Dictionary<Integer,Object> dictionary = new SortedLinkedDictionary<>();
 		for (int i = 0; i < size; i++)
 			dictionary.add(rand.nextInt(size), new Object());
 		
@@ -48,12 +52,13 @@ public class Example5 {
 		System.out.println("SortedLinkedDictionary: " + (t2 - t1) + ", " + (t3 - t2) + " msec");
 	}
 
-	public static void test_3(int size) {
+	public static void test_3() {
 		Random rand = new Random();
+
+		Map<Integer, Object> dictionary = new Hashtable<>(size);
 
 		long t1 = System.currentTimeMillis();
 
-		Map<Integer,Object> dictionary = new Hashtable<>(size);
 		for (int i = 0; i < size; i++)
 			dictionary.put(rand.nextInt(size), new Object());
 		
@@ -68,11 +73,9 @@ public class Example5 {
 	}
 
 	public static void main(String[] args) {
-		int size = 100000;
-
-		test_1(size);
-		test_2(size);
-		test_3(size);
+		test_1();
+		test_2();
+		test_3();
 	}
 
 }
